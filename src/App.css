@@ -1,0 +1,71 @@
+.MuiTypography-h6 {
+  font-size: 1.25rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 700 !important;
+  line-height: 1.6;
+  letter-spacing: 0.0075em;
+}
+
+.MuiAppBar-colorPrimary {
+  color: #fff;
+  background-color: #5068ee !important;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: row !important;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.navbar-nav > li > a{
+  text-decoration: none !important;
+  text-align: left;
+  font: normal normal normal 14px/19px Roboto;
+  letter-spacing: 0px;
+  color: #fff9f9;
+  opacity: 1;
+  padding: 15px;
+  font-weight: 700;
+  font-size: medium;
+}
+
+
+.imgBlueSky{
+  height: 4em;
+  width: 5em;
+  padding-right: 20px;
+  float: left;
+  margin-right: .001em
+}
+
+
+.footerstyle {
+  background-color: #52368c;
+}
+  .CardRoot {
+    max-width:  345px;
+    
+  }
+
+  .GridRoot {
+    flex-Grow: 1;    
+  }
+
+
+.cardBody{
+  display: flow-root;
+  padding: 5px 5px;
+}
+
+/* .sectionAdjust {
+  text-align: left;
+  font: normal normal medium 20px/26px Roboto;
+  letter-spacing: 0px;
+  color: #818181;
+  opacity: 1;
+} */
+
+.cardstyle{
+height: 100%;
+}
