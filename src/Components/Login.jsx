@@ -17,6 +17,10 @@ import DateFnsUtils from '@date-io/date-fns';
 import Icon from '@material-ui/core/Icon';
 import firebase from '../firebase';
 import NumberAuthentication from '../NumberAuthentication';
+import { useHistory } from "react-router-dom";
+import Home from './Home';
+import history from '../history';
+
 
 import {
   MuiPickersUtilsProvider,
@@ -71,7 +75,33 @@ export default function Login() {
               // ...
             });
         }
+
+
+
+        const submitClick = () =>{
+          const date1 = new Date(); 
+const date2 = new Date(document.getElementById("date-picker-inline").value);
+const year = date1.getFullYear() - date2.getFullYear();
+
+const month = date1.getMonth() - date2.getMonth();
+
+var age = calculate_age(date2)
+localStorage.setItem("age",age);
+
+var gender = document.getElementById("gender");
+
+localStorage.setItem("gender",gender);
+          history.push('/Home')        
+        }
+             
+
+        function calculate_age(dob) { 
+          var diff_ms = Date.now() - dob.getTime();
+          var age_dt = new Date(diff_ms); 
         
+          return Math.abs(age_dt.getFullYear() - 1970);
+      }
+
 
   return (
     <form class = "pt-3 pl-3">
@@ -112,7 +142,7 @@ Verify Code
 <div class = "pt-2">
 <FormControl className={classes.margin} component="fieldset">
   <FormLabel component="legend">Gender</FormLabel>
-  <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleChange}>
+  <RadioGroup aria-label="gender" id = "gender" name="gender1" value={value} onChange={handleChange}>
     <FormControlLabel value="female" control={<Radio />} label="Female" />
     <FormControlLabel value="male" control={<Radio />} label="Male" />
     <FormControlLabel value="other" control={<Radio />} label="Other" />
@@ -135,14 +165,19 @@ Verify Code
             'aria-label': 'change date',
           }}
         />
+
           </MuiPickersUtilsProvider>
 
 <div>
-<Button className={classes.margin} variant="contained" color="primary">
+<Button className={classes.margin} variant="contained" color="primary" onClick={submitClick}>
 Submit
 </Button>
 </div>
 </form>
 
+
+
   );
+
+
 }
