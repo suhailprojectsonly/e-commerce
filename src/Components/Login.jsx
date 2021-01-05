@@ -15,6 +15,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import DateFnsUtils from '@date-io/date-fns';
 import Icon from '@material-ui/core/Icon';
+import firebase from '../firebase';
+import NumberAuthentication from '../NumberAuthentication';
 
 import {
   MuiPickersUtilsProvider,
@@ -35,27 +37,49 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Login() {
  
-    const classes = useStyles();
+        const classes = useStyles();
+    
+     const [value, setValue] = React.useState('female');
 
-    const [value, setValue] = React.useState('female');
-
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
+      const handleChange = (event) => {
+        setValue(event.target.value);
+      };
 
         const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
       
         const handleDateChange = (date) => {
           setSelectedDate(date);
+          
         };
       
+
+        // //phone authentication
+        
+  
+
+      const handleClick = () =>{
+        const phoneNumber = document.getElementById("mobile").value;
+        const appVerifier = window.recaptchaVerifier;
+        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then((confirmationResult) => {
+              // SMS sent. Prompt user to type the code from the message, then sign the
+              // user in with confirmationResult.confirm(code).
+              window.confirmationResult = confirmationResult;
+              // ...
+            }).catch((error) => {
+              // Error; SMS not sent
+              // ...
+            });
+        }
+        
+
   return (
     <form class = "pt-3 pl-3">
 
-<div id = "mobileNumber">        
+<div id = "mobileNumberdiv">        
 <TextField
         className={classes.margin}
-        id="input-with-icon-textfield"
+        id="mobile"
         placeholder="+9156******"
         InputProps={{
           startAdornment: (
@@ -65,10 +89,12 @@ export default function Login() {
           ),
         }}
       />
-      <div id = "recaptcha-contrainer"></div>
 </div>
 
-<Button variant="outlined" size="medium" onClick = "phoneAuth()" color="primary" className={classes.margin}>
+<div id=" recaptcha-container"> </div>
+
+
+<Button variant="outlined" size="medium" onClick = {handleClick} color="primary" className={classes.margin}>
 Genereate OTP
         </Button>
 
@@ -76,6 +102,7 @@ Genereate OTP
 <div class= "pt-2" id= "otp">
 <Input placeholder="OTP" className={classes.margin}  inputProps={{ 'aria-label': 'description' }} />
 </div>
+
         <Button variant="outlined" size="medium" onClick = "codeVerify()" color="primary" className={classes.margin}>
 Verify Code
         </Button>

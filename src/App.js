@@ -1,7 +1,6 @@
 import './App.css';
 import Login from './Components/Login';
 import Header from './Components/Header';
-import Categories from './Components/Categories';
 
 
 
