@@ -9,8 +9,11 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import StarRating from "./StarRating";
+import history from '../history';
+import BottomNav from './BottomNav';
 
 
 export default class Home extends Component {
@@ -26,7 +29,6 @@ export default class Home extends Component {
       
   render() {
 
-
     const { error, isLoaded, items } = this.state;
 if (error) {
   return <div>Error: {error.message}</div>;
@@ -36,6 +38,9 @@ if (error) {
   
 
     return (
+
+      <div>
+      
       <div class="container">
 
         <div className="GridRoot">
@@ -83,6 +88,8 @@ if (error) {
           </nav>
         </div>
       </div>
+      <BottomNav/>
+      </div>
     );
 }
     
@@ -125,15 +132,18 @@ createCards() {
                 {list[i].category}
                 </Typography>
 
-
                 <Typography variant="h6" color="textSecondary" component="p">
                 Price : ${list[i].price}
-                </Typography>
-
-              </CardContent>
-
-              
-
+                </Typography>  
+              </CardContent>    
+              <div class = "ml-1">
+                  <StarRating id={list[i].id}/>
+                </div>
+              <CardActions>         
+              </CardActions>
+              <div>
+              <button type="button" class="btn btn-outline-primary" style = {{width : "100%"}}  onClick={() => this.addClick(list[i])} >Add</button>
+                </div>
             </CardActionArea>
             </Card>
       
@@ -149,6 +159,31 @@ createCards() {
 componentDidMount() { 
 this.getCategories();
  }
+
+  addClick = (item) =>{
+
+    
+     console.log(item);
+    var _cart = [];
+
+   var stringExisting =  localStorage.getItem("cartItems");
+   var existing= JSON.parse(stringExisting);
+   if(existing && existing.length>0)
+   {
+    _cart = existing;
+   }
+
+    _cart.push(item);
+
+    localStorage.setItem("cartItems", JSON.stringify(_cart));
+
+    
+}
+
+
+cartPage(){
+  history.push('/Cart')    
+}
 
 
 getCategories(){
@@ -173,7 +208,7 @@ getCategories(){
     }
 //var promise =  Promise((reso, reject) => {
     fetch(
-        `http://asia-south1-adon-interviews.cloudfunctions.net/getProductByCategory?category=kid%27s-fashion`,
+        `https://asia-south1-adon-interviews.cloudfunctions.net/getProductByCategory?category=kid%27s-fashion`,
         {
         method: "GET",
         }
@@ -195,136 +230,5 @@ getCategories(){
         );
 
 }
-
-
-// listSourceDummy() {
-//     var list = [
-//       {
-//         imgSrc: "/images/image2.png",
-//         itemHeader: "Group Benefits and Attracting",
-//         itemDescription: `A primary goal and challenge of many Canadian companies is the attraction and retention of top talent.`,
-//         sectionName: "Group benifits",
-//       },
-//       {
-//         imgSrc: "/images/image3.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial Services has a mission:`,
-//         sectionName: "Group benifits",
-//       },
-//       {
-//         imgSrc: "/images/image4.png",
-//         itemHeader: "3 Things You Need To Know",
-//         itemDescription: `Life insurance should really take center stage when it comes to
-//         financial planning. Yes, we need cash flow`,
-//         sectionName: "Group benifits",
-//       },
-//       {
-//         imgSrc: "/images/image5.png",
-//         itemHeader: "3 Things You Need To Know",
-//         itemDescription: `Life insurance should really take center stage when it comes to
-//         financial planning. Yes, we need cash flow`,
-
-//         sectionName: "Life Insuarance",
-//       },  {
-//         imgSrc: "/images/image6.png",
-//         itemHeader: "3 Things You Need To Know",
-//         itemDescription: `Life insurance should really take center stage when it comes to
-//         financial planning. Yes, we need cash flow`,
-//         sectionName: "Life Insuarance",
-//       },  {
-//         imgSrc: "/images/image7.png",
-//         itemHeader: "3 Things You Need To Know",
-//         itemDescription: `Life insurance should really take center stage when it comes to
-//         financial planning. Yes, we need cash flow`,
-//         sectionName: "Life Insuarance",
-//       },
-//       {
-//         imgSrc: "/images/image8.png",
-//         itemHeader: "How To Reduce Your Debt",
-//         itemDescription: ` I recently answered a question on Quora from a 20-year-old who
-//         wanted to know if it was a good.`,
-//         sectionName: "Travel Insuarance",
-//       },
-//       {
-//         imgSrc: "/images/image9.png",
-//         itemHeader: "New Year’s resolutions for Yor life",
-//         itemDescription: `  Vowing to eat better this year? Some of the most common
-//         nutrition resolutions aren’t easy to keep.`,
-//         sectionName: "Travel Insuarance",
-//       },
-//       {
-//         imgSrc: "/images/image10.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Travel Insuarance",
-//       },
-//       {
-//         imgSrc: "/images/image11.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Wealth Management",
-//       },
-//       {
-//         imgSrc: "/images/image12.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Wealth Management",
-//       },
-//       {
-//         imgSrc: "/images/image13.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Wealth Management",
-//       },
-//       {
-//         imgSrc: "/images/image14.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//       sectionName: "Financial Planning",
-//           },
-//       {
-//         imgSrc: "/images/image15.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Financial Planning",
-//       },
-//       {
-//         imgSrc: "/images/image16.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "Financial Planning",
-//       },
-//       {
-//         imgSrc: "/images/image17.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "News Update",
-//       },
-//       {
-//         imgSrc: "/images/image18.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "News Update",
-//       },
-//       {
-//         imgSrc: "/images/image19.png",
-//         itemHeader: "Readers’ Choice Award Winner For",
-//         itemDescription: `Joy A. Adams, Founder and CEO of Covenant Wealth Financial
-//       Services has a mission.`,
-//         sectionName: "News Update",
-//       },
-    
-//     ];
-//     return list;
-//   }
 }
 

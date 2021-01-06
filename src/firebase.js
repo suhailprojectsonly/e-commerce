@@ -1,12 +1,5 @@
 import firebase from 'firebase'
 
-window.onload = function() {
-    loadCaptcha();
-};
-
-function loadCaptcha(){
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
-}
 
 const config = {
     apiKey: "AIzaSyDUZOFDslFGOP6cHp24lXlEK-XrTb237sc",
@@ -18,7 +11,6 @@ const config = {
 }
 
 firebase.initializeApp(config);
-
 
 
 export default firebase
