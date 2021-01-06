@@ -40,6 +40,16 @@
 }
 
 
+.button {
+  overflow: visible;
+  /* background-color: beige; */
+  background-color: #0275d8 !important;
+}
+
+ .input {
+  overflow: visible;
+  /* background-color: beige; */
+}
 .footerstyle {
   background-color: #44626e;
 }
@@ -71,3 +81,29 @@
   opacity: 1;
 } */
 
+/* .firebaseui-title {
+  display: none;
+}
+.firebaseui-id-submit {
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 2px solid #008CBA;
+  background-color: #008CBA;
+  color: white;
+}
+
+
+.firebaseui-id-submit:hover {
+  background-color: white; 
+  color: black; 
+  
+} */

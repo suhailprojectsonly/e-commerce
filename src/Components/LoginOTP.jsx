@@ -24,6 +24,7 @@ import firebaseConfig  from '../firebaseConfig';
 import firebase from "firebase";
 import * as firebaseui from "firebaseui";
 import '../firebase-ui-auth.css';
+import Login from "./Login";
 
 import {
   MuiPickersUtilsProvider,
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Login() {
+export default function LoginOTP() {
   const classes = useStyles();
 
   const [value, setValue] = React.useState("female");
@@ -57,6 +58,20 @@ export default function Login() {
   };
 
 
+
+  // //phone authentication
+useEffect(() => {
+  const fbase = firebase.initializeApp(firebaseConfig);
+  const uiConfig = {
+    signInSuccessUrl: "Login", 
+    signInOptions: [firebase.auth.PhoneAuthProvider.PROVIDER_ID],
+    tosUrl: "https://netflix-clone-ankur.herokuapp.com/"
+  };
+  var ui = new firebaseui.auth.AuthUI(firebase.auth());
+  ui.start("#firebaseui-auth-container", uiConfig);
+}
+
+);
 
 
 
@@ -105,87 +120,9 @@ export default function Login() {
       </div> */}
 
 
-
-      <div class="container">
-      <div class="pt-2">
-        <FormControl className={classes.margin} component="fieldset">
-          <FormLabel component="legend">Gender</FormLabel>
-          <RadioGroup
-            aria-label="gender"
-            id="gender"
-            name="gender1"
-            value={value}
-            onChange={handleChange}
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-          </RadioGroup>
-        </FormControl>
+      <div id="firebaseui-auth-container">
       </div>
-
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          disableToolbar
-          variant="inline"
-          format="MM/dd/yyyy"
-          margin="normal"
-          id="date-picker-inline"
-          label="Date picker inline"
-          value={selectedDate}
-          onChange={handleDateChange}
-          KeyboardButtonProps={{
-            "aria-label": "change date",
-          }}
-        />
-      </MuiPickersUtilsProvider>
-
-      <div>
-        <Button
-          className={classes.margin}
-          variant="contained"
-          color="primary"
-          onClick={submitClick}
-        >
-          Submit
-        </Button>
-      </div>
-      </div>
-    
-
-
-      {/* <Button
-        variant="outlined"
-        size="medium"
-        onClick={onClick}
-        color="primary"
-        className={classes.margin}
-      >
-        Genereate OTP
-      </Button> */}
-
-      {/* <div class="pt-2" id="otp">
-        <Input
-          placeholder="OTP"
-          className={classes.margin}
-          inputProps={{ "aria-label": "description" }}
-        />
-      </div>
-
-      <Button
-        variant="outlined"
-        size="medium"
-        onClick="codeVerify()"
-        color="primary"
-        className={classes.margin}
-      >
-        Verify Code
-      </Button> */}
-
+   
     </form>
     </div>
   );

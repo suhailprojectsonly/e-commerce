@@ -1,7 +1,7 @@
-import firebase from 'firebase'
 
 
-const config = {
+
+var config = {
     apiKey: "AIzaSyDUZOFDslFGOP6cHp24lXlEK-XrTb237sc",
     authDomain: "ecommerce-9e628.firebaseapp.com",
     projectId: "ecommerce-9e628",
@@ -10,7 +10,6 @@ const config = {
     appId: "1:833470779071:web:3283567f0d743edc59c00a"
 }
 
-firebase.initializeApp(config);
 
 
-export default firebase
+export default config

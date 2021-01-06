@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './Components/Login';
+import LoginOTP from './Components/LoginOTP';
 import Header from './Components/Header';
 import { Router, Switch, Route } from "react-router-dom";
 import Home from "./Components/Home";
@@ -19,7 +20,8 @@ function App() {
                 <Switch>
                     <Route path="/Home" exact component={Home} />
                     <Route path="/Cart" exact component={Cart} />
-                    <Route path="" exact component={Login} />
+                    <Route path="/Login" exact component={Login} />
+                    <Route path="" exact component={LoginOTP} />
                 </Switch>
             </Router>
 
